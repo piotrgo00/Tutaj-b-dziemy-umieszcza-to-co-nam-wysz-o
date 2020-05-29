@@ -51,6 +51,18 @@ namespace EPRESS
 
         }
     }
+    class Drukarnie 
+    {
+        private List<Drukarnia> drukarnie = new List<Drukarnia>();
+        public List<Drukarnia> GetDrukarnie() { return drukarnie; }
+    }
+    class Drukarnia
+    {
+        private string nazwa;
+        private bool czyMozeAlbumy;
+        public string GetNazwa() { return nazwa; }
+        public bool GetMozeAlbumy() { return czyMozeAlbumy; }
+    }
     class DzialProgramowy
     {
         private Umowy umowy;
@@ -70,7 +82,26 @@ namespace EPRESS
     }
     class Umowy
     {
-
+        private List<Umowa> umowy=new List<Umowa>();
+        public void Dodaj(Umowa umowa)
+        {
+            umowy.Add(umowa);
+        }
+        public void Usun(Umowa umowa)
+        {
+            umowy.Remove(umowa);
+        }
+        public List<Umowa> GetUmowy()
+        {
+            return umowy;
+        }
+        public void Wypisz(List<Umowa> umowy)
+        {
+            foreach(Umowa umowa in umowy)
+            {
+                Console.WriteLine("autor: "+umowa.GetAutor()+"Czas trwania: " + umowa.GetCzasTrwania() + "Wynagrodzenie: " + umowa.GetWynagrodzenie());
+            }
+        }
     }
     class Umowa
     {
@@ -81,6 +112,8 @@ namespace EPRESS
         public float GetWynagrodzenie() { return wynagrodzenie; }
         public Autor GetAutor() { return autor; }
     }
+    class UmowaoPrace : Umowa { }
+    class UmowaoDzielo : Umowa { }
     class Autorzy
     {
         private List<Autor> autorzy = new List<Autor>();

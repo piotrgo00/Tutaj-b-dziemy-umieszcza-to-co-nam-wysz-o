@@ -18,8 +18,8 @@ namespace EPRESS
     {
         private int wybor;
         
-        public void dodawanie()//Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
-        {                       //różne konstruktory w zależności od typów parametrów?
+        public void dodawanie(Umowa umowa)  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
+        {                                   //różne konstruktory w zależności od typów parametrów?
 
         }
         public void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
@@ -206,7 +206,7 @@ namespace EPRESS
     }
     class Ksiazki
     {
-        private List<Ksiazka> ksiazki=new List<Ksiazka>;
+        private List<Ksiazka> ksiazki=new List<Ksiazka>();
         public void dodaj(Ksiazka ksiazka)
         {
             ksiazki.Add(ksiazka);

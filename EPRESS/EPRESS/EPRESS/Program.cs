@@ -11,7 +11,7 @@ Minimalny zakres funkcjonalności:
 
     -zapis i odczyt stanu systemu na dysk*/
 using System;
-
+using System.Collections.Generic;
 namespace EPRESS
 {  
     class ePress
@@ -41,19 +41,96 @@ namespace EPRESS
     }
     class DzialDruku
     {
+        private Drukarnie drukarnie;
+        public void drukuj()
+        {
 
+        }
+        public void wydrukowano()
+        {
+
+        }
     }
     class DzialProgramowy
     {
+        private Umowy umowy;
+        private Autorzy autorzy;
+        public void WybierzDrukarnie()
+        {
 
+        }
+        public void Zatrudnij()
+        {
+
+        }
+        public void Przeslij()
+        {
+
+        }
     }
     class DzialHandlowy
     {
+        private Czasopisma czasopisma;
+        private Ksiazki ksiazki;
+        public void zlecenie()
+        {
 
+        }
+        public void oferta()
+        {
+
+        }
+        public void przeslij()
+        {
+
+        }
+    }
+    class Czasopismo
+    {
+        private int numer;
+        private float cena;
+        private string tytul;
+        public string GetTytyul()
+        {
+            return tytul;
+        }
+        public float GetCena()
+        {
+            return cena;
+        }
+        public int GetNumerCzasopisma()
+        {
+            return numer;
+        }
+    }
+    class Tygodnik : Czasopismo { }
+    class Miesiecznik : Czasopismo { }
+    class Czasopisma
+    {
+        private List<Czasopismo> Czasopismos =new List<Czasopismo>();
+        public void Dodaj(Czasopismo czasopismo)
+        {
+            Czasopismos.Add(czasopismo);
+        }
+        public void Usun(Czasopismo czasopismo)
+        {
+            Czasopismos.Remove(czasopismo);
+        }
+        public List<Czasopismo> GetPisma()
+        {
+            return Czasopismos;
+        }
+        public void Wypisz(List<Czasopismo> czasopisma)
+        {
+            foreach(Czasopismo gazeta in czasopisma)
+            {
+                Console.WriteLine(gazeta.GetTytyul()+" nr: "+gazeta.GetNumerCzasopisma()+" cena: "+gazeta.GetCena());
+            }
+        }
     }
     class MainClass
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("EPRESS i'm comming!");
         }

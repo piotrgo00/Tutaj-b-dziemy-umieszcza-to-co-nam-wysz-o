@@ -68,6 +68,19 @@ namespace EPRESS
 
         }
     }
+    class Umowy
+    {
+
+    }
+    class Umowa
+    {
+        private int CzastrwaniaUmowy;
+        private float wynagrodzenie;
+        private Autor autor;
+        public int GetCzasTrwania() { return CzastrwaniaUmowy; }
+        public float GetWynagrodzenie() { return wynagrodzenie; }
+        public Autor GetAutor() { return autor; }
+    }
     class Autorzy
     {
         private List<Autor> autorzy = new List<Autor>();

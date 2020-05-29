@@ -68,6 +68,36 @@ namespace EPRESS
 
         }
     }
+    class Autorzy
+    {
+        private List<Autor> autorzy = new List<Autor>();
+        public void Dodaj(Autor autor)
+        {
+            autorzy.Add(autor);
+        }
+        public void Usun(Autor autor)
+        {
+            autorzy.Add(autor);
+        }
+        public List<Autor> GetAutorzy()
+        {
+            return autorzy;
+        }
+        public void Wypisz (List<Autor> autorzy)
+        {
+            foreach(Autor autor in autorzy)
+            {
+                Console.WriteLine(autor.GetImie() + " " + autor.GetNazwisko());
+            }
+        }
+    }
+    class Autor
+    {
+        private string imie;
+        private string nazwisko;
+        public string GetImie() { return imie; }
+        public string GetNazwisko() { return nazwisko; }
+    }
     class DzialHandlowy
     {
         private Czasopisma czasopisma;
@@ -128,6 +158,50 @@ namespace EPRESS
             }
         }
     }
+    class Ksiazki
+    {
+        private List<Ksiazka> ksiazki=new List<Ksiazka>;
+        public void dodaj(Ksiazka ksiazka)
+        {
+            ksiazki.Add(ksiazka);
+        }
+        public void usun(Ksiazka ksiazka)
+        {
+            ksiazki.Remove(ksiazka);
+        }
+        public List<Ksiazka> GetKsiazki()
+        {
+            return ksiazki;
+        }
+        public void Wypisz(List<Ksiazka> ksiazki)
+        {
+            foreach(Ksiazka ksiazka in ksiazki)
+            {
+                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor() + " Rok wydania: " + ksiazka.GetRokWydania());
+            }
+        }
+    }
+    class Ksiazka
+    {
+        private string tytul;
+        private Autor Autor;
+        private int RokWydania;
+        public string GetTytul()
+        {
+            return tytul;
+        }
+        public int GetRokWydania()
+        {
+            return RokWydania;
+        }
+        public Autor GetAutor()
+        {
+            return Autor;
+        }
+    }
+    class Sensacyjna : Ksiazka { }
+    class Album : Ksiazka { }
+    class Romans : Ksiazka { }
     class MainClass
     {
         public static void Main()

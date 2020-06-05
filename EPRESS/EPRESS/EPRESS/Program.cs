@@ -20,6 +20,27 @@ namespace EPRESS
         
         public void dodawanie(Umowa umowa)  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
         {                                   //różne konstruktory w zależności od typów parametrów?
+            int m;
+            Console.WriteLine("Dodaj\n1. Autora\n2. Umowe\n3. Publikacje\n");
+            m = Console.Read();
+            switch (m)
+            {
+                case 1:
+                    DodajPoz.dodajAutora();
+                    break;
+                case 2:
+                    DodajPoz.dodajUmowe();
+                    break;
+                case 3:
+                    DodajPoz.dodajKsiazke();
+                    break;
+                case 4:
+                    DodajPoz.dodajCzasopismo();
+                    break;
+                default:
+                    Console.WriteLine("Podano nieprawidlowa wartosc.");
+                    break;
+            }
 
         }
         public void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
@@ -53,7 +74,11 @@ namespace EPRESS
     }
     class Drukarnie 
     {
-        private List<Drukarnia> drukarnie = new List<Drukarnia>();
+        private List<Drukarnia> drukarnie;
+        public Drukarnie()
+        {
+            drukarnie = new List<Drukarnia>();
+        }
         public List<Drukarnia> GetDrukarnie() { return drukarnie; }
     }
     class Drukarnia
@@ -82,7 +107,11 @@ namespace EPRESS
     }
     class Umowy
     {
-        private List<Umowa> umowy=new List<Umowa>();
+        private List<Umowa> umowy;
+        public Umowy()
+        {
+            umowy = new List<Umowa>();
+        }
         public void Dodaj(Umowa umowa)
         {
             umowy.Add(umowa);
@@ -116,7 +145,12 @@ namespace EPRESS
     class UmowaoDzielo : Umowa { }
     class Autorzy
     {
-        private List<Autor> autorzy = new List<Autor>();
+        private List<Autor> autorzy;
+
+        public Autorzy()
+        {
+            autorzy = new List<Autor>();
+        }
         public void Dodaj(Autor autor)
         {
             autorzy.Add(autor);
@@ -136,11 +170,27 @@ namespace EPRESS
                 Console.WriteLine(autor.GetImie() + " " + autor.GetNazwisko());
             }
         }
+        public Autor Znajdz(string nazwisko)
+        {
+            foreach(Autor autor in autorzy)
+            {
+                if (String.Compare(autor.GetNazwisko(), nazwisko)==0)
+                    return autor;
+
+            }
+            return null;
+        }
     }
     class Autor
     {
         private string imie;
         private string nazwisko;
+        Autor() { }
+        public Autor(string im, string naz)
+        {
+            imie = im;
+            nazwisko = naz;
+        }
         public string GetImie() { return imie; }
         public string GetNazwisko() { return nazwisko; }
     }
@@ -183,18 +233,22 @@ namespace EPRESS
     class Miesiecznik : Czasopismo { }
     class Czasopisma
     {
-        private List<Czasopismo> Czasopismos =new List<Czasopismo>();
+        private List<Czasopismo> czasopisma;
+        public Czasopisma()
+        {
+            czasopisma = new List<Czasopismo>();
+        }
         public void Dodaj(Czasopismo czasopismo)
         {
-            Czasopismos.Add(czasopismo);
+            czasopisma.Add(czasopismo);
         }
         public void Usun(Czasopismo czasopismo)
         {
-            Czasopismos.Remove(czasopismo);
+            czasopisma.Remove(czasopismo);
         }
         public List<Czasopismo> GetPisma()
         {
-            return Czasopismos;
+            return czasopisma;
         }
         public void Wypisz(List<Czasopismo> czasopisma)
         {
@@ -206,7 +260,11 @@ namespace EPRESS
     }
     class Ksiazki
     {
-        private List<Ksiazka> ksiazki=new List<Ksiazka>();
+        private List<Ksiazka> ksiazki;
+        public Ksiazki()
+        {
+            ksiazki = new List<Ksiazka>();
+        }
         public void dodaj(Ksiazka ksiazka)
         {
             ksiazki.Add(ksiazka);

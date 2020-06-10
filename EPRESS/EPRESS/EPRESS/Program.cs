@@ -16,9 +16,35 @@ namespace EPRESS
 {  
     class ePress
     {
-        private int wybor;
-        
-        public void dodawanie(Umowa umowa)  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
+
+        public void init()
+        {
+            int m;
+            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Drukuj element\n4. Wczytaj baze z pliku\n5. Zapisz baże do pliku\nWybor: ");
+            m = Console.Read();
+            switch (m)
+            {
+                case 1:
+                    dodawanie();
+                    break;
+                case 2:
+                    usuwanie();
+                    break;
+                case 3:
+                    drukowanie();
+                    break;
+                case 4:
+                    wczytaj();
+                    break;
+                case 5:
+                    zapisz();
+                    break;
+                default:
+                    Console.WriteLine("Podano nieprawidlowa wartosc.");
+                    break;
+            }
+        }
+        private void dodawanie()  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
         {                                   //różne konstruktory w zależności od typów parametrów?
             int m;
             Console.WriteLine("Dodaj\n1. Autora\n2. Umowe\n3. Publikacje\n");
@@ -43,19 +69,19 @@ namespace EPRESS
             }
 
         }
-        public void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
+        private void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
         {                   //trzeba będzie dodać różne konstruktory w zależności od typu parametrów
 
         }
-        public void drukowanie()
+        private void drukowanie()
         {
 
         }
-        public void wczytaj()
+        private void wczytaj()
         {
 
         }
-        public void zapisz()
+        private void zapisz()
         {
 
         }
@@ -80,11 +106,25 @@ namespace EPRESS
             drukarnie = new List<Drukarnia>();
         }
         public List<Drukarnia> GetDrukarnie() { return drukarnie; }
+        public Drukarnia DajDrukarnie(bool CzyAlbum)
+        {
+            foreach(Drukarnia druk in drukarnie)
+            {
+                if (druk.GetMozeAlbumy() == CzyAlbum) { return druk; }
+                
+            }
+            return null;
+        }
     }
     class Drukarnia
     {
         private string nazwa;
         private bool czyMozeAlbumy;
+        public Drukarnia(string nazwaa, bool czymoze)
+        {
+            nazwa = nazwaa;
+            czyMozeAlbumy = czymoze;
+        }
         public string GetNazwa() { return nazwa; }
         public bool GetMozeAlbumy() { return czyMozeAlbumy; }
     }
@@ -92,8 +132,11 @@ namespace EPRESS
     {
         private Umowy umowy;
         private Autorzy autorzy;
-        public void WybierzDrukarnie()
+        public Drukarnie druk = new Drukarnie();
+        public Drukarnia WybierzDrukarnie(bool DrukujeAlbumy)
         {
+           
+               return druk.DajDrukarnie(DrukujeAlbumy);
 
         }
         public void Zatrudnij()
@@ -134,15 +177,39 @@ namespace EPRESS
     }
     class Umowa
     {
-        private int CzastrwaniaUmowy;
-        private float wynagrodzenie;
-        private Autor autor;
+        public int CzastrwaniaUmowy { private get; set; }
+        public float wynagrodzenie { private get; set; }
+        public Autor autor { private get; set; }
+        public Umowa(int CzasTrwania,float wynag, Autor Autor)
+        {
+            CzastrwaniaUmowy = CzasTrwania;
+            wynagrodzenie = wynag;
+            autor = Autor;
+        }
+
         public int GetCzasTrwania() { return CzastrwaniaUmowy; }
         public float GetWynagrodzenie() { return wynagrodzenie; }
         public Autor GetAutor() { return autor; }
     }
-    class UmowaoPrace : Umowa { }
-    class UmowaoDzielo : Umowa { }
+    class UmowaoPrace : Umowa 
+    {
+        public UmowaoPrace(int czasTrwania, float wynag, Autor autor):base(czasTrwania,wynag,autor)
+                                                                  
+        {
+            this.CzastrwaniaUmowy = czasTrwania;
+            this.wynagrodzenie = wynag;
+            this.autor = autor;
+        }
+    }
+    class UmowaoDzielo : Umowa 
+    {
+        public UmowaoDzielo(int czasTrwania, float wynag, Autor autor) : base(czasTrwania,wynag,autor)
+        { 
+            this.CzastrwaniaUmowy = czasTrwania;
+            this.wynagrodzenie = wynag;
+            this.autor = autor;
+        }
+    }
     class Autorzy
     {
         private List<Autor> autorzy;
@@ -216,6 +283,12 @@ namespace EPRESS
         private int numer;
         private float cena;
         private string tytul;
+        public Czasopismo(int nr,float Cen,string tyt)
+        {
+            numer = nr;
+            cena = Cen;
+            tytul = tyt;
+        }
         public string GetTytyul()
         {
             return tytul;
@@ -229,8 +302,14 @@ namespace EPRESS
             return numer;
         }
     }
-    class Tygodnik : Czasopismo { }
-    class Miesiecznik : Czasopismo { }
+    class Tygodnik : Czasopismo 
+    {
+    public Tygodnik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+    }
+    class Miesiecznik : Czasopismo 
+    {
+        public Miesiecznik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+    }
     class Czasopisma
     {
         private List<Czasopismo> czasopisma;
@@ -287,9 +366,16 @@ namespace EPRESS
     }
     class Ksiazka
     {
+       
         private string tytul;
         private Autor Autor;
         private int RokWydania;
+        public Ksiazka(string tyt,Autor autor, int rokWyd)
+        {
+            tytul = tyt;
+            Autor = autor;
+            RokWydania = rokWyd;
+        }
         public string GetTytul()
         {
             return tytul;
@@ -303,14 +389,25 @@ namespace EPRESS
             return Autor;
         }
     }
-    class Sensacyjna : Ksiazka { }
-    class Album : Ksiazka { }
-    class Romans : Ksiazka { }
+    class Sensacyjna : Ksiazka 
+    {
+        public Sensacyjna(string tyt, Autor autor, int rokWyd) : base(tyt, autor, rokWyd){}
+    }
+    class Album : Ksiazka 
+    {
+        public Album(string tyt, Autor autor, int rokWyd) : base(tyt, autor, rokWyd) { }
+    }
+    class Romans : Ksiazka {
+        public Romans(string tyt, Autor autor, int rokWyd) : base(tyt, autor, rokWyd) { }
+    }
     class MainClass
     {
         public static void Main()
         {
-            Console.WriteLine("EPRESS i'm comming!");
+            Console.WriteLine("Kurwa!");
+            ePress wydawnictowo = new ePress();
+            wydawnictowo.init();
+            
         }
     }
 }

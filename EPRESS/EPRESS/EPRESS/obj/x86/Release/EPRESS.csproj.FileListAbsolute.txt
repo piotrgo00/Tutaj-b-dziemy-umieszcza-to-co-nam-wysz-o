@@ -1,0 +1,3 @@
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/bin/Release/EPRESS.exe
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/obj/x86/Release/EPRESS.csproj.CoreCompileInputs.cache
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/obj/x86/Release/EPRESS.exe

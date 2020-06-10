@@ -20,17 +20,33 @@ namespace EPRESS
 
             return autor;
         }
-        public static void dodajUmowe(int typ)
+        public static void dodajUmowe()
         {
             int czasTrwania, wybor;
             float pensja;
-            string nazwisko;
+            
             Console.WriteLine("Podaj autora\n1. Nowy autor\n2. Istniejacy autor");
             wybor = Console.Read();
             Autor autor = null;
             if (wybor == 1)
             {
                 autor = dodajAutora();
+                Console.WriteLine("Podaj czas trwania umowy w miesiacach: ");
+                czasTrwania = Console.Read();
+                Console.WriteLine("Podaj Pensje autora: ");                                                         /*Potrzeba mi tutaj wyszukiwania autorow i przypisywania im konkretnych umów*/              
+                 pensja = Console.Read();
+                Umowa umowa = new Umowa(czasTrwania,pensja,autor);
+            }
+            else if (wybor == 2)
+            {
+                Console.WriteLine("Podaj czas trwania umowy w miesiacach: ");
+                czasTrwania = Console.Read();
+                Console.WriteLine("Podaj Pensje autora: ");
+                pensja = Console.Read();
+            }
+            else
+            {
+                Console.WriteLine("Nie odpowiedni wybor, nie udalo sie dodac autora!");
             }
             return;
         }

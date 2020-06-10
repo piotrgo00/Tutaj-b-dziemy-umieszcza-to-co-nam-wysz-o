@@ -1,0 +1,5 @@
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/bin/Debug/EPRESS.exe
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/bin/Debug/EPRESS.pdb
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/obj/x86/Debug/EPRESS.csproj.CoreCompileInputs.cache
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/obj/x86/Debug/EPRESS.exe
+/home/shizzed/Documents/Programowanie Obiektowe/Epress/Tutaj-b-dziemy-umieszcza-to-co-nam-wysz-o/EPRESS/EPRESS/EPRESS/obj/x86/Debug/EPRESS.pdb

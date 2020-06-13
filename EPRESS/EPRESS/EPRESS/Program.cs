@@ -12,16 +12,18 @@ Minimalny zakres funkcjonalności:
     -zapis i odczyt stanu systemu na dysk*/
 using System;
 using System.Collections.Generic;
+using System.Net;
+
 namespace EPRESS
 {  
     class ePress
     {
 
-        public void init()
+        public int init()
         {
             int m;
-            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Drukuj element\n4. Wczytaj baze z pliku\n5. Zapisz baże do pliku\nWybor: ");
-            m = Console.Read();
+            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Drukuj element\n4. Wczytaj baze z pliku\n5. Zapisz baze do pliku\n6. Wyjscie\nWybor: ");
+            m = int.Parse(Console.ReadLine());
             switch (m)
             {
                 case 1:
@@ -39,16 +41,21 @@ namespace EPRESS
                 case 5:
                     zapisz();
                     break;
+                case 6:
+                    return 1;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Podano nieprawidlowa wartosc.");
-                    break;
+                    return 0;
             }
+            Console.Clear();
+            return 0;
         }
         private void dodawanie()  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
         {                                   //różne konstruktory w zależności od typów parametrów?
             int m;
-            Console.WriteLine("Dodaj\n1. Autora\n2. Umowe\n3. Publikacje\n");
-            m = Console.Read();
+            Console.WriteLine("Dodaj\n1. Autora\n2. Umowe\n3. Ksiazka\n4. Czasopismo\n");
+            m = int.Parse(Console.ReadLine());
             switch (m)
             {
                 case 1:
@@ -148,7 +155,7 @@ namespace EPRESS
 
         }
     }
-    class Umowy
+    public class Umowy
     {
         private List<Umowa> umowy;
         public Umowy()
@@ -175,7 +182,7 @@ namespace EPRESS
             }
         }
     }
-    class Umowa
+    public class Umowa
     {
         public int CzastrwaniaUmowy { private get; set; }
         public float wynagrodzenie { private get; set; }
@@ -210,7 +217,7 @@ namespace EPRESS
             this.autor = autor;
         }
     }
-    class Autorzy
+    public class Autorzy
     {
         private List<Autor> autorzy;
 
@@ -237,18 +244,18 @@ namespace EPRESS
                 Console.WriteLine(autor.GetImie() + " " + autor.GetNazwisko());
             }
         }
-        public Autor Znajdz(string nazwisko)
+        public Autor Znajdz(string imie, string nazwisko)
         {
             foreach(Autor autor in autorzy)
             {
-                if (String.Compare(autor.GetNazwisko(), nazwisko)==0)
+                if ((String.Compare(autor.GetNazwisko(), nazwisko)==0)&&(String.Compare(autor.GetImie(), imie) == 0))
                     return autor;
 
             }
             return null;
         }
     }
-    class Autor
+    public class Autor
     {
         private string imie;
         private string nazwisko;
@@ -278,7 +285,7 @@ namespace EPRESS
 
         }
     }
-    class Czasopismo
+    public class Czasopismo
     {
         private int numer;
         private float cena;
@@ -310,7 +317,7 @@ namespace EPRESS
     {
         public Miesiecznik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
     }
-    class Czasopisma
+    public class Czasopisma
     {
         private List<Czasopismo> czasopisma;
         public Czasopisma()
@@ -337,7 +344,7 @@ namespace EPRESS
             }
         }
     }
-    class Ksiazki
+    public class Ksiazki
     {
         private List<Ksiazka> ksiazki;
         public Ksiazki()
@@ -364,7 +371,7 @@ namespace EPRESS
             }
         }
     }
-    class Ksiazka
+    public class Ksiazka
     {
        
         private string tytul;
@@ -404,9 +411,14 @@ namespace EPRESS
     {
         public static void Main()
         {
+            int m;
             Console.WriteLine("Kurwa!");
             ePress wydawnictowo = new ePress();
-            wydawnictowo.init();
+            do
+            {
+                m = wydawnictowo.init();
+                
+            } while (m == 0);
             
         }
     }

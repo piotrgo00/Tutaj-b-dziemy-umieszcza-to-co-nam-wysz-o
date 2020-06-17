@@ -13,6 +13,7 @@ Minimalny zakres funkcjonalności:
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.IO;
 
 namespace EPRESS
 {  
@@ -48,7 +49,7 @@ namespace EPRESS
                     Console.WriteLine("Podano nieprawidlowa wartosc.");
                     return 0;
             }
-            Console.Clear();
+            //Console.Clear();
             return 0;
         }
         private void dodawanie()  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
@@ -77,8 +78,42 @@ namespace EPRESS
 
         }
         private void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
-        {                   //trzeba będzie dodać różne konstruktory w zależności od typu parametrów
+        {
+            string imie="";
+            string nazwisko="";
+            string umowa1;
+            string umowa2;
+            string umowa3;
+            Console.WriteLine("To jest lista autorow: ");                                              //trzeba będzie dodać różne konstruktory w zależności od typu parametrów
+            using (StreamReader file = new StreamReader("autorzy.txt"))
+            {
+                int iterator = 0;
 
+
+                string[] autorzy = file.ReadToEnd().Split(' ');
+                foreach (string autor in autorzy)
+                {
+                    if(iterator == 0)
+                    { imie = autor; Console.WriteLine("Imie to: " + imie); }
+                    if (iterator == 1)
+                    { nazwisko = autor; Console.WriteLine("Nazwisko to: " + nazwisko); }
+
+                    iterator++;
+                    if (iterator == 2)
+                    {
+                        
+                        iterator = 0;
+                    }
+                }
+                file.Close();
+
+
+            }
+            Console.WriteLine("Ktorego chcialbys usunac?\n Podaj jego Imie: ");
+            imie=Console.ReadLine();
+            Console.WriteLine("Podaj jego nazwisko: ");
+            nazwisko = Console.ReadLine();
+            //Usuwanie Utorów!
         }
         private void drukowanie()
         {
@@ -86,6 +121,71 @@ namespace EPRESS
         }
         private void wczytaj()
         {
+            
+            using (StreamReader file = new StreamReader("autorzy.txt"))
+            {
+                int iterator = 0;
+                string imie = "";
+                string nazwisko = "";
+
+                string[] autorzy = file.ReadToEnd().Split(' ');
+                foreach (string autor in autorzy)
+                {
+                    
+                    if (iterator == 0) 
+                    {imie = autor; Console.WriteLine("Imie to: " + imie);}
+                    if (iterator == 1) 
+                    { nazwisko = autor; Console.WriteLine("Nazwisko to: " + nazwisko); }
+                  
+                    iterator++;
+                    if (iterator == 2)
+                    {
+                        DodajPoz.dodajAutora(imie, nazwisko);
+                        iterator = 0;
+                    }
+                }
+                file.Close();
+            }
+            using (StreamReader file = new StreamReader("umowy.txt"))
+            {
+                int iterator = 0; 
+                int czastrwania=0;
+                float zarobki=0;
+                string imieAutora="";
+                string nazwiskoAutora="";
+                string[] umowy =  file.ReadToEnd().Split(' ');
+
+                
+                foreach (string umowa in umowy)
+                {
+
+                    
+                    if (iterator == 0)
+                    { czastrwania = int.Parse(umowa); Console.WriteLine("Czas trwania umowy to: " + czastrwania); }
+                    if (iterator == 1)
+                    {
+                        zarobki = float.Parse(umowa);Console.WriteLine("Zarobki na umowie to: " + zarobki);
+                    }
+                    if (iterator == 2)
+                    {
+                        imieAutora = umowa;Console.WriteLine("Imie autora to: " + imieAutora);
+                    }
+                    if (iterator == 3)
+                    {
+                        nazwiskoAutora = umowa;Console.WriteLine("Nazwisko autora to: " + nazwiskoAutora);
+                    }
+                    iterator++;
+                    if (iterator == 4)
+                    {
+                        DodajPoz.dodajUmowe(czastrwania,zarobki,imieAutora,nazwiskoAutora);
+                        iterator = 0;
+                    }
+                }
+                file.Close();
+            }
+
+
+
 
         }
         private void zapisz()

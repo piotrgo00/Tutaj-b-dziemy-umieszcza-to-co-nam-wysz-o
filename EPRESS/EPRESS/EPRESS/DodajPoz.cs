@@ -9,6 +9,15 @@ namespace EPRESS
 {
     class DodajPoz
     {
+        public static Autor dodajAutora(string imie, string nazwisko)
+        {
+           
+
+            Autor autor = new Autor(imie, nazwisko);
+            Start.autorzy.Dodaj(autor);
+
+            return autor;
+        }
         public static Autor dodajAutora()
         {
             string imie, nazwisko;
@@ -21,6 +30,13 @@ namespace EPRESS
             Start.autorzy.Dodaj(autor);
 
             return autor;
+        }
+        public static void dodajUmowe(int czas,float kasa,string imieaut,string nazaut)
+        {
+            
+            Autor autor = new Autor(imieaut, nazaut);
+            Umowa umowa = new Umowa(czas, kasa, autor);
+            Start.umowy.Dodaj(umowa);
         }
         public static void dodajUmowe()
         {
@@ -44,6 +60,7 @@ namespace EPRESS
             {
                 autor = dodajAutora();
                 Umowa umowa = new Umowa(czasTrwania,pensja,autor);
+                Start.umowy.Dodaj(umowa);
             }
             else if (wybor == 2)
             {

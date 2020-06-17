@@ -47,8 +47,11 @@ namespace EPRESS
             {
                 if (Start.autorzy.Licz() == 0)
                 {
-                    Console.WriteLine("Baza autorow jest pusta.\n");
+                    Console.WriteLine("Baza autorow jest pusta.\nAnulowano operacje.\n");
+                    return;
                 }
+                Console.Clear();
+                Start.autorzy.Wypisz();
                 Console.WriteLine("Imie autora: ");
                 imieTmp = Console.ReadLine();
                 Console.WriteLine("Nazwisko autora: ");
@@ -91,6 +94,7 @@ namespace EPRESS
             Autor autor = null;
             string tytul, nazwiskoTmp, imieTmp;
             int rokWydania, wybor;
+            Console.Clear();
             Console.WriteLine("Podaj tytul ksiazki: ");
             tytul = Console.ReadLine();
             Console.WriteLine("Podaj rok wydania: ");
@@ -110,12 +114,23 @@ namespace EPRESS
             }
             else if (wybor == 2)
             {
-                Console.WriteLine("Nazwisko autora: ");
-                nazwiskoTmp = Console.ReadLine();
+                if (Start.autorzy.Licz() == 0)
+                {
+                    Console.WriteLine("Brak autorow w bazie.\nAnulowano operacje.\n");
+                    return;
+                }
+                Start.autorzy.Wypisz();
                 Console.WriteLine("Imie autora: ");
                 imieTmp = Console.ReadLine();
+                Console.WriteLine("Nazwisko autora: ");
+                nazwiskoTmp = Console.ReadLine();
                 Console.Clear();
                 autor = Start.autorzy.Znajdz(imieTmp, nazwiskoTmp);
+                if(autor == null)
+                {
+                    Console.WriteLine("Takiego autora nie ma w bazie.\nAnulowano operacje.\n");
+                    return;
+                }
 
             }
             Console.WriteLine("Typ ksiazki:\n1. Sensacyjna\n2. Romans\n3. Album");

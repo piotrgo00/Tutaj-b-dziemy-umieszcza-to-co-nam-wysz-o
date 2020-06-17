@@ -252,7 +252,7 @@ namespace EPRESS
         public Autor GetAutor() { return autor; }
         public void Wypisz()
         {
-            Console.WriteLine("Autor: " + autor.GetImie()+" "+autor.GetNazwisko() +" | Czas trwania: "+CzastrwaniaUmowy+" | Wynagrodzenie: "+wynagrodzenie+"\n");
+            Console.WriteLine("Autor: " + autor.GetImie()+" "+autor.GetNazwisko() +" | Czas trwania: "+CzastrwaniaUmowy+" | Wynagrodzenie: "+wynagrodzenie+" | "+GetType().ToString().Substring(7)+"\n");
         }
 
     }
@@ -406,7 +406,7 @@ namespace EPRESS
             else
                 foreach (Czasopismo gazeta in czasopisma)
             {
-                Console.WriteLine(gazeta.GetTytyul()+" cena: "+gazeta.GetCena());
+                Console.WriteLine(gazeta.GetTytyul()+" | Cena: "+gazeta.GetCena()+" | "+gazeta.GetType().ToString().Substring(7));
             }
         }
     }
@@ -436,7 +436,7 @@ namespace EPRESS
             else
                 foreach (Ksiazka ksiazka in ksiazki)
             {
-                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor().GetImie()+" "+ksiazka.GetAutor().GetNazwisko() + " | Rok wydania: " + ksiazka.GetRokWydania()+"\n");
+                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor().GetImie()+" "+ksiazka.GetAutor().GetNazwisko() + " | Rok wydania: " + ksiazka.GetRokWydania()+" | "+ksiazka.GetType().ToString().Substring(7)+"\n");
             }
         }
     }
@@ -446,6 +446,8 @@ namespace EPRESS
         private string tytul;
         private Autor Autor;
         private int RokWydania;
+        private string typ;
+
         public Ksiazka(string tyt,Autor autor, int rokWyd)
         {
             tytul = tyt;

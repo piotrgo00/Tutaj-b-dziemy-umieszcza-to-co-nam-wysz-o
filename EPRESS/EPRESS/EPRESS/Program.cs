@@ -78,7 +78,8 @@ namespace EPRESS
 
         }
         private void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
-        {
+        {                       
+                                //jeszcze nie dziala;
             int m;
             Console.Clear();
             Console.WriteLine("Usun\n1. Autora\n2. Umowe\n3. Ksiazka\n4. Czasopismo\n");

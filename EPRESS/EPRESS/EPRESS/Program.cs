@@ -287,12 +287,10 @@ namespace EPRESS
     }
     public class Czasopismo
     {
-        private int numer;
         private float cena;
         private string tytul;
-        public Czasopismo(int nr,float Cen,string tyt)
+        public Czasopismo(float Cen,string tyt)
         {
-            numer = nr;
             cena = Cen;
             tytul = tyt;
         }
@@ -304,18 +302,14 @@ namespace EPRESS
         {
             return cena;
         }
-        public int GetNumerCzasopisma()
-        {
-            return numer;
-        }
     }
     class Tygodnik : Czasopismo 
     {
-    public Tygodnik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+    public Tygodnik(float Cen, string tyt) : base(Cen, tyt) { }
     }
     class Miesiecznik : Czasopismo 
     {
-        public Miesiecznik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+        public Miesiecznik(float Cen, string tyt) : base(Cen, tyt) { }
     }
     public class Czasopisma
     {
@@ -340,7 +334,7 @@ namespace EPRESS
         {
             foreach(Czasopismo gazeta in czasopisma)
             {
-                Console.WriteLine(gazeta.GetTytyul()+" nr: "+gazeta.GetNumerCzasopisma()+" cena: "+gazeta.GetCena());
+                Console.WriteLine(gazeta.GetTytyul()+" cena: "+gazeta.GetCena());
             }
         }
     }

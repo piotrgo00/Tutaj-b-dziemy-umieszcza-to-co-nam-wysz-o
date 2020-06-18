@@ -79,62 +79,7 @@ namespace EPRESS
         }
         private void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
         {
-            string imie="";
-            string nazwisko="";
-            string[] autorzy;
-            int liczbaElementow;
-            string umowa1;
-            string umowa2;
-            string umowa3;
-            Console.WriteLine("To jest lista autorow: ");                                              //trzeba będzie dodać różne konstruktory w zależności od typu parametrów
-            using (StreamReader file = new StreamReader("autorzy.txt"))
-            {
-                int iterator = 0;
-                liczbaElementow=0;
 
-                autorzy = file.ReadToEnd().Split(' ');
-                foreach (string autor in autorzy)
-                {
-                    if(iterator == 0)
-                    { imie = autor; Console.WriteLine("Imie to: " + imie);liczbaElementow++; }
-                    if (iterator == 1)
-                    { nazwisko = autor; Console.WriteLine("Nazwisko to: " + nazwisko);liczbaElementow++; }
-
-                    iterator++;
-                    if (iterator == 2)
-                    {
-                        
-                        iterator = 0;
-                    }
-                }
-                
-                Console.WriteLine("Ktorego chcialbys usunac?\n Podaj jego Imie: ");
-                imie = Console.ReadLine();
-                Console.WriteLine("Podaj jego nazwisko: ");
-                nazwisko = Console.ReadLine();
-
-               for(int i = 0; i<= liczbaElementow/2; i+=2)
-                {
-                    if (autorzy[i] == imie && autorzy[i + 1] == nazwisko)
-                    {
-                        for (int j = 0; j < liczbaElementow / 2; j += 2)
-                        {
-                            autorzy[i] = autorzy[i + 2];
-                            autorzy[i + 1] = autorzy[i + 3];
-                        }
-                    }
-                }
-                file.Close();
-            }
-            using(StreamWriter file=new StreamWriter("autorzy1.txt"))
-            {
-                for(int i = 0; i < liczbaElementow - 2; i++)
-                {
-                    file.Write(autorzy[i] + " ");
-                }
-                file.Close();
-            }
-            
         }
         private void drukowanie()
         {

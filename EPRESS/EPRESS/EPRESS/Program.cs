@@ -223,7 +223,18 @@ namespace EPRESS
         private Drukarnie drukarnie;
         public void drukuj()
         {
-
+            string tytul;
+            Ksiazka ksiazka;
+            Console.WriteLine("Podaj tytul ksiazki: \n");
+            tytul = Console.ReadLine();
+            ksiazka = Start.ksiazki.Znajdz(tytul);
+            if(ksiazka == null)
+            {
+                Console.WriteLine("Nie ma ksiazki w bazie.\nDodaj ksiazke.");
+                DodajPoz.dodajKsiazke();
+            }
+            Console.WriteLine("Podaj ilosc ksiazek do wydrukowania: ");
+            ksiazka.DodajIlosc(Convert.ToInt32(Console.ReadLine()));
         }
         public void wydrukowano()
         {
@@ -559,7 +570,7 @@ namespace EPRESS
     }
     public class Ksiazka
     {
-       
+        private int ilosc = 0;
         private string tytul;
         private Autor Autor;
         private int RokWydania;
@@ -582,6 +593,10 @@ namespace EPRESS
         public Autor GetAutor()
         {
             return Autor;
+        }
+        public void DodajIlosc(int ilosc)
+        {
+            this.ilosc += ilosc;
         }
     }
     class Sensacyjna : Ksiazka 

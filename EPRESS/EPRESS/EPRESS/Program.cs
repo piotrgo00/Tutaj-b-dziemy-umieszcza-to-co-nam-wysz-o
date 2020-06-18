@@ -23,7 +23,7 @@ namespace EPRESS
         public int init()
         {
             int m;
-            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Wyswietl element\n4. Wczytaj baze z pliku\n5. Zapisz baze do pliku\n6. Wyjscie\nWybor: ");
+            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Wyswietl element\n4. Wczytaj baze z pliku\n5. Zapisz baze do pliku\n6. Drukuj ksiazki\n7. Wyjscie\nWybor: ");
             m = int.Parse(Console.ReadLine());
             switch (m)
             {
@@ -43,6 +43,9 @@ namespace EPRESS
                     zapisz();
                     break;
                 case 6:
+                    DzialDruku.drukuj();
+                    break;
+                case 7:
                     return 1;
                 default:
                     Console.Clear();

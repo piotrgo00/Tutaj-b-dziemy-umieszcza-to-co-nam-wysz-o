@@ -91,7 +91,7 @@ namespace EPRESS
                     UsunPoz.usunAutora();
                     break;
                 case 2:
-                    
+                    UsunPoz.usunUmowe();
                     break;
                 case 3:
                     
@@ -299,6 +299,10 @@ namespace EPRESS
         {
             return umowy;
         }
+        public int Licz()
+        {
+            return umowy.Count;
+        }
         public void Wypisz()
         {
             if (umowy.Count == 0)
@@ -308,6 +312,15 @@ namespace EPRESS
             {
                 umowa.Wypisz();
             }
+        }
+        public Umowa Znajdz(string imie, string nazwisko)
+        {
+            foreach (Umowa umowa in umowy)
+            {
+                if ( (String.Compare(umowa.GetAutor().GetNazwisko(), nazwisko) == 0) && (String.Compare(umowa.GetAutor().GetImie(), imie) == 0) )
+                    return umowa;
+            }
+            return null;
         }
     }
     public class Umowa

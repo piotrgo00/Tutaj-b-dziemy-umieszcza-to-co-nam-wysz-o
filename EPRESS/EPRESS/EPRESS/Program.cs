@@ -224,10 +224,12 @@ namespace EPRESS
     class DzialDruku
     {
         private Drukarnie drukarnie;
-        public void drukuj()
+        static public void drukuj()
         {
             string tytul;
             Ksiazka ksiazka;
+            Console.Clear();
+            WyswietlPoz.wysKsiazki();
             Console.WriteLine("Podaj tytul ksiazki: \n");
             tytul = Console.ReadLine();
             ksiazka = Start.ksiazki.Znajdz(tytul);
@@ -238,6 +240,7 @@ namespace EPRESS
             }
             Console.WriteLine("Podaj ilosc ksiazek do wydrukowania: ");
             ksiazka.DodajIlosc(Convert.ToInt32(Console.ReadLine()));
+            Console.Clear();
         }
         public void wydrukowano()
         {

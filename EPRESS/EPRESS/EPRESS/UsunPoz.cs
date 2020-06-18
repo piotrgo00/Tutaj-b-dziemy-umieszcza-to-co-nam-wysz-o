@@ -16,6 +16,7 @@ namespace EPRESS
             {
                 Console.WriteLine("Brak autorow w bazie.\nAnulowano operacje.");
             }
+            Start.autorzy.Wypisz();
             Console.WriteLine("Podaj imie autora do usuniecia: ");
             imie = Console.ReadLine();
             Console.WriteLine("Podaj nazwisko autora do usuniecia: ");
@@ -23,7 +24,7 @@ namespace EPRESS
             autor = Start.autorzy.Znajdz(imie, nazwisko);
             if(autor == null)
             {
-                Console.WriteLine("Takiego autora nie ma w bazie.");        //wyjatek - brak autora (albo w autorzy.Znajdz();
+                Console.WriteLine("Takiego autora nie ma w bazie.\n");        //wyjatek - brak autora (albo w autorzy.Znajdz();
                 return;
             }
             Start.autorzy.Usun(autor);
@@ -35,6 +36,21 @@ namespace EPRESS
         public static void usunUmowe(Umowa umowa)
         {
             Start.umowy.Usun(umowa);
+        }
+        public static void usunKsiazke()
+        {
+            string tyt;
+
+            Start.ksiazki.Wypisz();
+            Console.WriteLine("Podaj tytul ksiazki do usuniecia: ");
+            tyt = Console.ReadLine();
+            Ksiazka ksiazka = Start.ksiazki.Znajdz(tyt);
+            if (ksiazka == null)
+            {
+                Console.WriteLine("Takiej ksiazki nie ma w bazie.\n");
+                return;
+            }
+            Start.ksiazki.Usun(ksiazka);
         }
         public static void usunKsiazke(Ksiazka ksiazka)
         {

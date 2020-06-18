@@ -91,13 +91,13 @@ namespace EPRESS
                     UsunPoz.usunAutora();
                     break;
                 case 2:
-                    DodajPoz.dodajUmowe();
+                    
                     break;
                 case 3:
-                    DodajPoz.dodajKsiazke();
+                    
                     break;
                 case 4:
-                    DodajPoz.dodajCzasopismo();
+                    
                     break;
                 default:
                     Console.WriteLine("Podano nieprawidlowa wartosc.");
@@ -503,6 +503,16 @@ namespace EPRESS
         public List<Ksiazka> GetKsiazki()
         {
             return ksiazki;
+        }
+        public Ksiazka Znajdz(string tytul)
+        {
+            foreach (Ksiazka ksiazka in ksiazki)
+            {
+                if ((String.Compare(ksiazka.GetTytul(),tytul) == 0))
+                    return ksiazka;
+
+            }
+            return null;
         }
         public void Wypisz()
         {

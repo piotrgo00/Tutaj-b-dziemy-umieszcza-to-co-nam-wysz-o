@@ -221,7 +221,7 @@ namespace EPRESS
     class DzialDruku
     {
         private Drukarnie drukarnie;
-        public void drukuj()
+        static public void drukuj()
         {
 
         }

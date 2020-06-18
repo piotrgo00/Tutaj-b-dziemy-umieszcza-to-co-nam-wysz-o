@@ -23,6 +23,10 @@ namespace EPRESS
 
             return autor;
         }
+        public static void dodajAutora(Autor autor)
+        {
+            Start.autorzy.Dodaj(autor);
+        }
         public static void dodajUmowe()
         {
             int czasTrwania, wybor, wybor2;
@@ -88,6 +92,11 @@ namespace EPRESS
                 return;
             }
             return;
+        }
+        public static void dodajUmowe(int czasTrw, float pensja, Autor autor)
+        {
+            Umowa umowa = new Umowa(czasTrw, pensja, autor);
+            Start.umowy.Dodaj(umowa);
         }
         public static void dodajKsiazke()
         {

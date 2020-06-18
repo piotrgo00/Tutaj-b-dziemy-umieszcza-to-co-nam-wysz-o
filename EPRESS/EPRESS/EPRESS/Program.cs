@@ -13,6 +13,7 @@ Minimalny zakres funkcjonalności:
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.IO;
 
 namespace EPRESS
 {  
@@ -136,6 +137,80 @@ namespace EPRESS
         }
         private void wczytaj()
         {
+            using (StreamReader file = new StreamReader("autorzy.txt"))
+            {
+                int iterator = 0;
+                string imie = "";
+                string nazwisko = "";
+
+                string[] autorzy = file.ReadToEnd().Split(' ');
+                foreach (string autor in autorzy)
+                {
+
+                    if (iterator == 0)
+                    { imie = autor; Console.WriteLine("Imie to: " + imie); }
+                    if (iterator == 1)
+                    { nazwisko = autor; Console.WriteLine("Nazwisko to: " + nazwisko); }
+
+                    iterator++;
+                    if (iterator == 2)
+                    {
+                        Autor autorN = new Autor(imie, nazwisko);
+                        DodajPoz.dodajAutora(autorN);
+                        iterator = 0;
+                    }
+                }
+                file.Close();
+            }
+            using (StreamReader file = new StreamReader("umowy.txt"))
+            {
+                int iterator = 0;
+                int czastrwania = 0;
+                float zarobki = 0;
+                string imieAutora = "";
+                string nazwiskoAutora = "";
+                string[] umowy = file.ReadToEnd().Split(' ');
+
+
+                foreach (string umowa in umowy)
+                {
+
+
+                    if (iterator == 0)
+                    { czastrwania = int.Parse(umowa); Console.WriteLine("Czas trwania umowy to: " + czastrwania); }
+                    if (iterator == 1)
+                    {
+                        zarobki = float.Parse(umowa); Console.WriteLine("Zarobki na umowie to: " + zarobki);
+                    }
+                    if (iterator == 2)
+                    {
+                        imieAutora = umowa; Console.WriteLine("Imie autora to: " + imieAutora);
+                    }
+                    if (iterator == 3)
+                    {
+                        nazwiskoAutora = umowa; Console.WriteLine("Nazwisko autora to: " + nazwiskoAutora);
+                    }
+                    iterator++;
+                    if (iterator == 4)
+                    {
+                        Autor autorN;
+                        if (Start.autorzy.Znajdz(imieAutora, nazwiskoAutora) != null)
+                        {
+                           autorN = Start.autorzy.Znajdz(imieAutora, nazwiskoAutora);
+                        }
+                        else
+                        {
+                            autorN = new Autor(imieAutora, nazwiskoAutora);
+                        }
+                        
+                        DodajPoz.dodajUmowe(czastrwania, zarobki, autorN);
+                        iterator = 0;
+                    }
+                }
+                file.Close();
+            }
+
+
 
         }
         private void zapisz()

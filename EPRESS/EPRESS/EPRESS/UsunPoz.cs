@@ -34,6 +34,28 @@ namespace EPRESS
         {
             Start.autorzy.Usun(autor);
         }
+        public static void usunUmowe()
+        {
+            Umowa umowa;
+            string imie, nazwisko;
+            if (Start.umowy.Licz() == 0)
+            {
+                Console.WriteLine("Brak umow w bazie.\nAnulowano operacje.");
+                return;
+            }
+            Start.umowy.Wypisz();
+            Console.WriteLine("Podaj imie autora do usuniecia umowy: ");
+            imie = Console.ReadLine();
+            Console.WriteLine("Podaj nazwisko autora do usuniecia umowy: ");
+            nazwisko = Console.ReadLine();
+            umowa = Start.umowy.Znajdz(imie, nazwisko);
+            if (umowa == null)
+            {
+                Console.WriteLine("Nie ma umowy z takim autorem.\n");        //wyjatek - brak umowy;
+                return;
+            }
+            Start.umowy.Usun(umowa);
+        }
         public static void usunUmowe(Umowa umowa)
         {
             Start.umowy.Usun(umowa);

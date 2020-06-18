@@ -13,7 +13,6 @@ Minimalny zakres funkcjonalności:
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.IO;
 
 namespace EPRESS
 {  
@@ -23,7 +22,7 @@ namespace EPRESS
         public int init()
         {
             int m;
-            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Drukuj element\n4. Wczytaj baze z pliku\n5. Zapisz baze do pliku\n6. Wyjscie\nWybor: ");
+            Console.WriteLine("1. Dodaj element\n2. Usun element\n3. Wyswietl element\n4. Wczytaj baze z pliku\n5. Zapisz baze do pliku\n6. Wyjscie\nWybor: ");
             m = int.Parse(Console.ReadLine());
             switch (m)
             {
@@ -34,7 +33,7 @@ namespace EPRESS
                     usuwanie();
                     break;
                 case 3:
-                    drukowanie();
+                    wyswietlenie();
                     break;
                 case 4:
                     wczytaj();
@@ -55,6 +54,7 @@ namespace EPRESS
         private void dodawanie()  //Dodawanie Autora, publikacji, umowy itd. do naszej Bazy danych
         {                                   //różne konstruktory w zależności od typów parametrów?
             int m;
+            Console.Clear();
             Console.WriteLine("Dodaj\n1. Autora\n2. Umowe\n3. Ksiazka\n4. Czasopismo\n");
             m = int.Parse(Console.ReadLine());
             switch (m)
@@ -78,8 +78,57 @@ namespace EPRESS
 
         }
         private void usuwanie()//usuwanie autorów, publikacji, umówi itd. z naszej bazy danych
-        {
+        {                       
+                                //jeszcze nie dziala;
+            int m;
+            Console.Clear();
+            Console.WriteLine("Usun\n1. Autora\n2. Umowe\n3. Ksiazka\n4. Czasopismo\n");
+            m = int.Parse(Console.ReadLine());
+            switch (m)
+            {
+                case 1:
+                    UsunPoz.usunAutora();
+                    break;
+                case 2:
+                    DodajPoz.dodajUmowe();
+                    break;
+                case 3:
+                    DodajPoz.dodajKsiazke();
+                    break;
+                case 4:
+                    DodajPoz.dodajCzasopismo();
+                    break;
+                default:
+                    Console.WriteLine("Podano nieprawidlowa wartosc.");
+                    break;
+            }
 
+        }
+    
+        private void wyswietlenie()
+        {
+            int m;
+            Console.Clear();
+            Console.WriteLine("Wyswietl\n1. Autorow\n2. Umowy\n3. Ksiazki\n4. Czasopisma\n");
+            m = int.Parse(Console.ReadLine());
+            switch (m)
+            {
+                case 1:
+                    WyswietlPoz.wysAutorow();
+                    break;
+                case 2:
+                    WyswietlPoz.wysUmowy();
+                    break;
+                case 3:
+                    WyswietlPoz.wysKsiazki();
+                    break;
+                case 4:
+                    WyswietlPoz.wysCzasopisma();
+                    break;
+                default:
+                    Console.WriteLine("Podano nieprawidlowa wartosc.");
+                    break;
+            }
         }
         private void drukowanie()
         {
@@ -87,71 +136,6 @@ namespace EPRESS
         }
         private void wczytaj()
         {
-            
-            using (StreamReader file = new StreamReader("autorzy.txt"))
-            {
-                int iterator = 0;
-                string imie = "";
-                string nazwisko = "";
-
-                string[] autorzy = file.ReadToEnd().Split(' ');
-                foreach (string autor in autorzy)
-                {
-                    
-                    if (iterator == 0) 
-                    {imie = autor; Console.WriteLine("Imie to: " + imie);}
-                    if (iterator == 1) 
-                    { nazwisko = autor; Console.WriteLine("Nazwisko to: " + nazwisko); }
-                  
-                    iterator++;
-                    if (iterator == 2)
-                    {
-                        DodajPoz.dodajAutora(imie, nazwisko);
-                        iterator = 0;
-                    }
-                }
-                file.Close();
-            }
-            using (StreamReader file = new StreamReader("umowy.txt"))
-            {
-                int iterator = 0; 
-                int czastrwania=0;
-                float zarobki=0;
-                string imieAutora="";
-                string nazwiskoAutora="";
-                string[] umowy =  file.ReadToEnd().Split(' ');
-
-                
-                foreach (string umowa in umowy)
-                {
-
-                    
-                    if (iterator == 0)
-                    { czastrwania = int.Parse(umowa); Console.WriteLine("Czas trwania umowy to: " + czastrwania); }
-                    if (iterator == 1)
-                    {
-                        zarobki = float.Parse(umowa);Console.WriteLine("Zarobki na umowie to: " + zarobki);
-                    }
-                    if (iterator == 2)
-                    {
-                        imieAutora = umowa;Console.WriteLine("Imie autora to: " + imieAutora);
-                    }
-                    if (iterator == 3)
-                    {
-                        nazwiskoAutora = umowa;Console.WriteLine("Nazwisko autora to: " + nazwiskoAutora);
-                    }
-                    iterator++;
-                    if (iterator == 4)
-                    {
-                        DodajPoz.dodajUmowe(czastrwania,zarobki,imieAutora,nazwiskoAutora);
-                        iterator = 0;
-                    }
-                }
-                file.Close();
-            }
-
-
-
 
         }
         private void zapisz()
@@ -240,11 +224,14 @@ namespace EPRESS
         {
             return umowy;
         }
-        public void Wypisz(List<Umowa> umowy)
+        public void Wypisz()
         {
-            foreach(Umowa umowa in umowy)
+            if (umowy.Count == 0)
+                Console.WriteLine("Brak umow w bazie.");
+            else
+                foreach (Umowa umowa in umowy)
             {
-                Console.WriteLine("autor: "+umowa.GetAutor()+"Czas trwania: " + umowa.GetCzasTrwania() + "Wynagrodzenie: " + umowa.GetWynagrodzenie());
+                umowa.Wypisz();
             }
         }
     }
@@ -263,6 +250,11 @@ namespace EPRESS
         public int GetCzasTrwania() { return CzastrwaniaUmowy; }
         public float GetWynagrodzenie() { return wynagrodzenie; }
         public Autor GetAutor() { return autor; }
+        public void Wypisz()
+        {
+            Console.WriteLine("Autor: " + autor.GetImie()+" "+autor.GetNazwisko() +" | Czas trwania: "+CzastrwaniaUmowy+" | Wynagrodzenie: "+wynagrodzenie+" | "+GetType().ToString().Substring(7)+"\n");
+        }
+
     }
     class UmowaoPrace : Umowa 
     {
@@ -303,11 +295,18 @@ namespace EPRESS
         {
             return autorzy;
         }
-        public void Wypisz (List<Autor> autorzy)
+        public int Licz()
         {
+            return autorzy.Count;
+        }
+        public void Wypisz ()
+        {
+            if (autorzy.Count == 0)
+                Console.WriteLine("Brak autorow w bazie.");
+            else
             foreach(Autor autor in autorzy)
             {
-                Console.WriteLine(autor.GetImie() + " " + autor.GetNazwisko());
+                autor.Wypisz();
             }
         }
         public Autor Znajdz(string imie, string nazwisko)
@@ -333,6 +332,10 @@ namespace EPRESS
         }
         public string GetImie() { return imie; }
         public string GetNazwisko() { return nazwisko; }
+        public void Wypisz()
+        {
+            Console.WriteLine(imie + " " + nazwisko+"\n");
+        }
     }
     class DzialHandlowy
     {
@@ -353,12 +356,10 @@ namespace EPRESS
     }
     public class Czasopismo
     {
-        private int numer;
         private float cena;
         private string tytul;
-        public Czasopismo(int nr,float Cen,string tyt)
+        public Czasopismo(float Cen,string tyt)
         {
-            numer = nr;
             cena = Cen;
             tytul = tyt;
         }
@@ -370,18 +371,14 @@ namespace EPRESS
         {
             return cena;
         }
-        public int GetNumerCzasopisma()
-        {
-            return numer;
-        }
     }
     class Tygodnik : Czasopismo 
     {
-    public Tygodnik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+    public Tygodnik(float Cen, string tyt) : base(Cen, tyt) { }
     }
     class Miesiecznik : Czasopismo 
     {
-        public Miesiecznik(int nr, float Cen, string tyt) : base(nr, Cen, tyt) { }
+        public Miesiecznik(float Cen, string tyt) : base(Cen, tyt) { }
     }
     public class Czasopisma
     {
@@ -402,11 +399,14 @@ namespace EPRESS
         {
             return czasopisma;
         }
-        public void Wypisz(List<Czasopismo> czasopisma)
+        public void Wypisz()
         {
-            foreach(Czasopismo gazeta in czasopisma)
+            if (czasopisma.Count == 0)
+                Console.WriteLine("Brak czasopism w bazie.");
+            else
+                foreach (Czasopismo gazeta in czasopisma)
             {
-                Console.WriteLine(gazeta.GetTytyul()+" nr: "+gazeta.GetNumerCzasopisma()+" cena: "+gazeta.GetCena());
+                Console.WriteLine(gazeta.GetTytyul()+" | Cena: "+gazeta.GetCena()+" | "+gazeta.GetType().ToString().Substring(7));
             }
         }
     }
@@ -417,11 +417,11 @@ namespace EPRESS
         {
             ksiazki = new List<Ksiazka>();
         }
-        public void dodaj(Ksiazka ksiazka)
+        public void Dodaj(Ksiazka ksiazka)
         {
             ksiazki.Add(ksiazka);
         }
-        public void usun(Ksiazka ksiazka)
+        public void Usun(Ksiazka ksiazka)
         {
             ksiazki.Remove(ksiazka);
         }
@@ -429,11 +429,14 @@ namespace EPRESS
         {
             return ksiazki;
         }
-        public void Wypisz(List<Ksiazka> ksiazki)
+        public void Wypisz()
         {
-            foreach(Ksiazka ksiazka in ksiazki)
+            if (ksiazki.Count == 0)
+                Console.WriteLine("Brak ksiazek w bazie.");
+            else
+                foreach (Ksiazka ksiazka in ksiazki)
             {
-                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor() + " Rok wydania: " + ksiazka.GetRokWydania());
+                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor().GetImie()+" "+ksiazka.GetAutor().GetNazwisko() + " | Rok wydania: " + ksiazka.GetRokWydania()+" | "+ksiazka.GetType().ToString().Substring(7)+"\n");
             }
         }
     }
@@ -443,6 +446,8 @@ namespace EPRESS
         private string tytul;
         private Autor Autor;
         private int RokWydania;
+        private string typ;
+
         public Ksiazka(string tyt,Autor autor, int rokWyd)
         {
             tytul = tyt;

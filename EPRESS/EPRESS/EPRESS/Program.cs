@@ -564,7 +564,7 @@ namespace EPRESS
             else
                 foreach (Ksiazka ksiazka in ksiazki)
             {
-                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor().GetImie()+" "+ksiazka.GetAutor().GetNazwisko() + " | Rok wydania: " + ksiazka.GetRokWydania()+" | "+ksiazka.GetType().ToString().Substring(7)+"\n");
+                Console.WriteLine(ksiazka.GetTytul() + " Autor: " + ksiazka.GetAutor().GetImie()+" "+ksiazka.GetAutor().GetNazwisko() + " | Rok wydania: " + ksiazka.GetRokWydania()+" | "+ksiazka.GetType().ToString().Substring(7)+ " | Ilosc ksiazek na magazynie: "+ksiazka.GetIlosc()+"\n");
             }
         }
     }
@@ -585,6 +585,10 @@ namespace EPRESS
         public string GetTytul()
         {
             return tytul;
+        }
+        public int GetIlosc()
+        {
+            return ilosc;
         }
         public int GetRokWydania()
         {

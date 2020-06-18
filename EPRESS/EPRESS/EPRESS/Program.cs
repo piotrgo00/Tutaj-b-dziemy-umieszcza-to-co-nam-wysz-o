@@ -474,6 +474,17 @@ namespace EPRESS
         {
             return czasopisma;
         }
+        public Czasopismo Znajdz(string tyt)
+        {
+            foreach (Czasopismo czasop in czasopisma)
+            {
+                if ((String.Compare(czasop.GetTytyul(),tyt) == 0))
+                    return czasop;
+
+            }
+            return null;
+        }
+    
         public void Wypisz()
         {
             if (czasopisma.Count == 0)

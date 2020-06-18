@@ -56,6 +56,20 @@ namespace EPRESS
         {
             Start.ksiazki.Usun(ksiazka);
         }
+        public static void usunCzasopismo()
+        {
+            string tyt;
+            Start.czasopisma.Wypisz();
+            Console.WriteLine("Podaj tytul czasopisma do usuniecia: ");
+            tyt = Console.ReadLine();
+            Czasopismo czasop = Start.czasopisma.Znajdz(tyt);
+            if (czasop == null)
+            {
+                Console.WriteLine("Takiego czasopisma nie ma w bazie.\n");
+                return;
+            }
+            Start.czasopisma.Usun(czasop);
+        }
         public static void usunCzasopismo(Czasopismo czasop)
         {
             Start.czasopisma.Usun(czasop);

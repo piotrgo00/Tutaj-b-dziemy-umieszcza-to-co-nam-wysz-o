@@ -15,6 +15,7 @@ namespace EPRESS
             if (Start.autorzy.Licz() == 0)
             {
                 Console.WriteLine("Brak autorow w bazie.\nAnulowano operacje.");
+                return;
             }
             Start.autorzy.Wypisz();
             Console.WriteLine("Podaj imie autora do usuniecia: ");
@@ -40,7 +41,11 @@ namespace EPRESS
         public static void usunKsiazke()
         {
             string tyt;
-
+            if (Start.ksiazki.Licz() == 0)
+            {
+                Console.WriteLine("Brak ksiazek w bazie.\nAnulowano operacje.");
+                return;
+            }
             Start.ksiazki.Wypisz();
             Console.WriteLine("Podaj tytul ksiazki do usuniecia: ");
             tyt = Console.ReadLine();
@@ -59,6 +64,11 @@ namespace EPRESS
         public static void usunCzasopismo()
         {
             string tyt;
+            if (Start.czasopisma.Licz() == 0)
+            {
+                Console.WriteLine("Brak czasopism w bazie.\nAnulowano operacje.");
+                return;
+            }
             Start.czasopisma.Wypisz();
             Console.WriteLine("Podaj tytul czasopisma do usuniecia: ");
             tyt = Console.ReadLine();

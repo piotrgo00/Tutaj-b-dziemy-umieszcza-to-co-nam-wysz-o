@@ -474,6 +474,10 @@ namespace EPRESS
         {
             return czasopisma;
         }
+        public int Licz()
+        {
+            return czasopisma.Count;
+        }
         public Czasopismo Znajdz(string tyt)
         {
             foreach (Czasopismo czasop in czasopisma)
@@ -514,6 +518,10 @@ namespace EPRESS
         public List<Ksiazka> GetKsiazki()
         {
             return ksiazki;
+        }
+        public int Licz()
+        {
+            return ksiazki.Count;
         }
         public Ksiazka Znajdz(string tytul)
         {
